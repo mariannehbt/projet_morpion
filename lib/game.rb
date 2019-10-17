@@ -4,9 +4,7 @@ class Game
 
   #TO DO : la classe a plusieurs attr_accessor: le @current_player (égal à un objet Player), le status (en cours, nul ou un objet Player s'il gagne), le Board et un array contenant les 2 joueurs.
   attr_accessor :my_board, :players_array, :current_player
-    #le @current_player (égal à un objet Player),
     #le status (en cours, nul ou un objet Player s'il gagne),
-    #et un array contenant les 2 joueurs.
 
   #TO DO : créé 2 joueurs, créé un board, met le status à "on going", défini un @current_player
   def initialize
@@ -17,14 +15,14 @@ class Game
     player1_name = gets.chomp
     @player1 = Player.new(player1_name, "o")
     @players_array << @player1
-    puts "Bienvenue #{@player1.name} ! Tu as le symbole o"
+    puts "Bienvenue #{@player1.name} ! Tu as le symbole o."
 
     puts "Joueur 2, quel est ton prénom ?"
     print "> "
     player2_name = gets.chomp
     @player2 = Player.new(player2_name, "x")
     @players_array << @player2
-    puts "Bienvenue #{@player2.name} ! Tu as le symbole x"
+    puts "Bienvenue #{@player2.name} ! Tu as le symbole x."
 
     # Création du board
     @my_board = Board.new
@@ -70,6 +68,7 @@ class Game
 
       @my_board.board_array[player_choice].case_symbol = @current_player.symbol
       my_display = Show.new.show_board(@my_board.board_array)
+      puts my_display
       @current_player = (@players_array - [@current_player])[0]
     end
 
@@ -130,6 +129,21 @@ class Game
   def new_round
     #relance une partie en initialisant un nouveau board
     #mais en gardant les mêmes joueurs.
+    puts
+    puts "*" * 30
+    puts "Nouvelle partie ?"
+    puts "o - oui"
+    puts "n - non"
+    puts
+    print "> "
+    new_game_choice = gets.chomp
+    puts
+    case new_game_choice
+    when "o" then
+    return true
+    when "n" then
+    return false
+    end
   end
 
   # TO DO : permet l'affichage de fin de partie quand un vainqueur est détecté ou si il y a match nul
